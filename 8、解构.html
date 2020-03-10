@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>解构</title>
+</head>
+
+<body>
+  <script>
+    // 一、解构对象*********************
+    var expense = {
+      type: "es6",
+      amount: "45"
+    }
+    const { type, amount, abc } = expense;
+    console.log(type, amount, abc);
+    // 练习
+    var saveFiled = {
+      extension: "jpg",
+      name: "girl",
+      size: 13030
+    }
+    // es5
+    function fileSammary(file) {
+      return `${file.name}.${file.extension}的大小是${file.size}`
+    }
+    console.log(fileSammary(saveFiled));
+    // es6-通过解构
+    function fileSammary2({ name, extension, size }) {
+      return `${name}.${extension}的大小是${size}`
+    }
+    console.log(fileSammary2(saveFiled));
+    // 二、解构数组*********************
+    // 1、解构数组
+    const names = ["Kris", "lise", "kiven"]
+    // 解构
+    const [name1, name2, name3] = names
+    console.log(name1, name2, name3);
+    //返回数组长度
+    const { length } = names
+    console.log(length);
+    // 结合展开运算符
+    const [a, ...rest] = names
+    console.log(a);
+    console.log(rest);
+    // 2、解构数组对象
+    const people = [
+      { name: "Herry", age: 20 },
+      { name: "Kris", age: 29 },
+      { name: "Lisa", age: 27 },
+      { name: "Moli", age: 10 },
+    ]
+    // es5
+    // const age = people[0].age
+    // console.log(age);
+
+    // es6
+    const [{ age }] = people
+    console.log(age);
+    // 把数组转化为对象----使用解构
+    const point = [[4, 5], [10, 1], [0, 40]]
+    // 期望数据格式
+    // [
+    //   {x:4,y:5},
+    //   {x:10,y:1},
+    //   {x:0,y:40},
+    // ]
+    let newPoint = point.map(item => {
+      // const x = item[0]
+      // const y = item[1]
+      // return {x,y}
+      const [x,y]=item
+      return {x,y}
+    })
+    console.log(newPoint);
+
+    let newPoint2 = point.map(([x,y]) => {
+      return {x,y}
+    })
+    console.log(newPoint2);
+  </script>
+</body>
+
+</html>

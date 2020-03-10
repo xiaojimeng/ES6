@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="container">
+    <div id="template"></div>
+    <div id="template1"></div>
+
+  </div>
+  <script>
+    // `${定义的变量，常量，函数等}`
+    function makeUppercase(word) {
+      return word.toUpperCase()
+    }
+    let name="Kris"
+    let template = '<h1>倒海翻江更好地将回归快递费根据等号福建官方的空间规划的法规</h1><p>dhhdgfggggggggggggg</p>'
+    let template1 = `
+    <h1>你好，${name}倒海翻江更好地将回归快递费根据等号福建官方的空间规划的法规</h1>
+    <p>dhhdgfggggggggggggg</p>
+    <ul>
+    <li>${makeUppercase('dhdhhdh')}</li>
+    <li>dhdhhdh</li>
+    <li>dhdhhdh</li>
+    </ul>
+    `
+    document.getElementById("template").innerHTML = template
+    document.getElementById("template1").innerHTML = template1
+
+  </script>
+</body>
+
+</html>

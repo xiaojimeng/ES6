@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // Promise对象用于表示一个异步操作的最终状态（完成或失败），以及其返回的值
+    // 案例：动态往DOM添加内容（使用回调）
+    const posts = [
+      { title: "Post one", body: "this is pose one" },
+      { title: "Post two", body: "this is pose two" },
+
+    ]
+    function getPosts() {
+      setTimeout(() => {
+        let output = ''
+        posts.forEach((item, index) => {
+          output += `<li>${item.title}</li>`
+        })
+        document.body.innerHTML = output
+      }, 1000);
+    }
+    // getPosts()
+    function createPost(post, callback) {
+      setTimeout(() => {
+        posts.push(post);
+        // console.log(posts);
+        callback()
+      }, 2000);
+    }
+    createPost({ title: "Post three", body: "this is Post three" },getPosts)
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>面向对象</title>
+</head>
+
+<body>
+  <!-- 面向对象 -->
+  <script>
+    function Car(options) {
+      this.title = options.title
+    }
+    Car.prototype.drive = function () {
+      return "Vroom"
+    }
+    const car = new Car({ title: "BMW" })
+    console.log(car);
+    console.log(car.drive());
+    // es5继承
+    function Toyota(options) {
+      Car.call(this, options)
+      //继承Car的title属性
+      this.color = options.color
+    }
+    Toyota.prototype = Object.create(Car.prototype)
+    Toyota.prototype.constructor = Toyota;
+    //继承Car中的drive方法
+    const toyota = new Toyota({ color: "red", title: "Focus" })
+    console.log(toyota);
+    console.log(toyota.drive());
+    // es6
+    class Car1 {
+      // constructor(options) {
+      //   this.title = options.title
+      // }
+      // 通过解构
+      constructor({ title }) {
+        this.title = title
+      }
+      drive() {
+        return "Vroom"
+      }
+    }
+    const car1 = new Car1({ title: "Bwm" })
+    console.log(car1);
+    console.log(car1.drive());
+    class Toyota1 {
+      constructor(options) {
+        this.color = options.color
+      }
+    }
+
+    const toyota1 = new Toyota1({ title: "Node", color: "blue2" })
+    console.log(toyota1);
+    // es6继承
+    class Toyota2 extends Car {
+      constructor(options) {
+        super(options)//继承Car中的title属性和方法
+        this.color = options.color
+      }
+    }
+    const toyota2 = new Toyota2({ title: "Node", color: "blue3" })
+    console.log(toyota2);
+    console.log(toyota2.drive());
+
+  </script>
+</body>
+
+</html>

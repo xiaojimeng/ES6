@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // async和await
+    async function fn() {
+      // return "hello world"
+      const promise = new Promise((resolve, reject) => {
+        setTimeout(() => resolve("heool"), 200)
+      })
+      const error = true;
+      // const error = false;
+      if (!error) {
+        // 等待resolve执行完毕之后，才会执行
+        const res = await promise
+        return res
+      } else {
+        await Promise.reject(new Error("error"))
+      }
+
+    }
+    fn()
+      .then(data => console.log(data))
+      .catch(err => console.log(err))
+
+    // 请求数据
+    async function get() {
+      const response = await fetch("http://jsonplaceholder.typicode.com/users")
+      const data = await response.json()
+      return data
+      // 只有fetch异步请求回了数据才会执行下面的data，才会返回data
+    }
+    get().then(data => console.log(data))
+  </script>
+</body>
+
+</html>

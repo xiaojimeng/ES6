@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Promise</title>
+</head>
+
+<body>
+  <script>
+    // 构造函数：Promise
+    let promise = new Promise((resolve, reject) => {
+      resolve()
+      // reject()
+    })
+    console.log(promise);
+    promise.then(() => console.log('成功，没有任何问题'))
+      .then(() => console.log('可以无限调用'))
+      .catch(() => console.log("现在执行的是reject"));
+    // new http:fetch 一个基于promise的请求方法
+    let promise1 = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve()
+      }, 3000);
+    })
+    // console.log(fetch);
+    let url = "http://jsonplaceholder.typicode.com/posts"
+    fetch(url).then(response => response.json())
+      .then(data => console.log(data))
+      .catch(err => console.log("error"))
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>增强对象字面量</title>
+</head>
+
+<body>
+  <script>
+    /* 
+    增强对象字面量
+    作用：缩减代码
+     */
+    function createBookShop(inventory) {
+      return {
+        // inventory: inventory,
+        inventory,
+        inventoryValue: function () {
+          return this.inventory.reduce((sum, item) => {
+            return sum + item.price
+            // console.log(item.price);
+          }, 0)
+        },
+        priceForTitle: function (title) {
+          return this.inventory.find(book => {
+            return book.title === title
+          }).price
+        },
+        inventoryValue1() {
+          return this.inventory.reduce((sum, item) => {
+            return sum + item.price
+            // console.log(item.price);
+          }, 0)
+        },
+
+        priceForTitle1(title) {
+          return this.inventory.find(book => {
+            return book.title === title
+          }).price
+        }
+      }
+    }
+    const inventory = [
+      { title: "vue", price: 10 },
+      { title: "Angular", price: 15 },
+    ]
+    const bookShop = createBookShop(inventory)
+    console.log(bookShop.inventoryValue());
+    console.log(bookShop.priceForTitle("Angular"));
+    console.log(bookShop.inventoryValue1());
+    console.log(bookShop.priceForTitle1("vue"));
+      /*
+        const uarl = "http://fileupLoad.come"
+        const data = { color: "red" }
+        function saveFile(url, data) {
+          $.ajax({
+            method: "POST",
+            // url: url,
+            // data: data,
+             url,
+             data
+          })
+        }
+        */
+
+  </script>
+</body>
+
+</html>

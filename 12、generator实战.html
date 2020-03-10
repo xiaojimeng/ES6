@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>相亲网</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-me-6 mx-auto text-center">
+        <h1 class="mb-3">相亲网</h1>
+        <div id="imageDisplay">
+
+        </div>
+        <br>
+        <div id="profile"></div>
+        <br>
+        <button id="next" class="btn btn-dark btn-block">下一个</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    let info = [
+      {
+        name: "宋先生",
+        age: 39,
+        gender: "男",
+        lookingfor: "女",
+        location: "纽约",
+        image: "http://randomuser.me/api/portraits/men/82.jpg"
+      },
+      {
+        name: "吴先生",
+        age: 29,
+        gender: "男",
+        lookingfor: "女",
+        location: "北京",
+        image: "http://randomuser.me/api/portraits/men/89.jpg"
+      },
+      {
+        name: "杨女士",
+        age: 26,
+        gender: "女",
+        lookingfor: "男",
+        location: "上海",
+        image: "http://randomuser.me/api/portraits/women/83.jpg"
+      },
+      {
+        name: "刘先生",
+        age: 39,
+        gender: "男",
+        lookingfor: "女",
+        location: "杭州",
+        image: "http://randomuser.me/api/portraits/men/81.jpg"
+      },
+      {
+        name: "肖女士",
+        age: 36,
+        gender: "女",
+        lookingfor: "男",
+        location: "洛杉矶",
+        image: "http://randomuser.me/api/portraits/women/80.jpg"
+      }
+    ]
+    // 迭代器方法
+    // function profiles(info) {
+    //   let index = 0;
+    //   return {
+    //     next: function () {
+    //       return index < info.length ? { value: info[index++], done: false } : { value: undefined, done: true }
+    //     }
+    //   }
+    // }
+    // 生成器方法
+    function* profiles() {
+      yield info[0];
+      yield info[2];
+      yield info[3];
+    }
+    const profile = profiles(info)
+    // console.log(profile.next().value);
+    nextProfile()
+    document.getElementById('next').addEventListener("click", nextProfile)
+    function nextProfile() {
+      const currentProfile = profile.next().value
+      if (currentProfile !== undefined) {
+        document.getElementById('imageDisplay').innerHTML = `<img src="${currentProfile.image}"/>`
+        document.getElementById('profile').innerHTML = `
+                                  <ul class="list-group">
+                                    <li class="list-group-item">姓名：${currentProfile.name}</li>
+                                    <li class="list-group-item">性别：${currentProfile.gender}</li>
+                                    <li class="list-group-item">年龄：${currentProfile.age}</li>
+                                    <li class="list-group-item">地址：${currentProfile.location}</li>
+                                    <li class="list-group-item">寻找对象：${currentProfile.lookingfor}</li>
+                                  </ul>
+                                  `;
+      } else {
+        window.location.reload()
+      }
+    }
+  
+  
+
+  </script>
+</body>
+
+</html>

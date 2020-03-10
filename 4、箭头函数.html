@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /*  
+    箭头函数
+     1、减少代码
+     2、改变this指向 
+     const fn = ((形参1，形参2) => { return....})
+     如果只有一个形参,那么形参的括号可以省略；如果return的语句只有一句的时候 可以省略{}和return
+     const fun =(形参 => 一条语句)
+     */
+    const double = function (number) {
+      return number * 2
+    }
+    console.log(double(20));
+    const double2 = (number => {
+      return number * 2
+    })
+    console.log(double2(20));
+    const double3 = (number => number * 2)
+    console.log(double3(20));
+    // 改变this指向
+    const team = {
+      members: ["Herry", "Kris"],
+      teamName: "es6",
+      teamSummary: function () {
+        return this.members.map(function (member) {
+          return `${member}隶属于${this.teamName}小组`
+        })
+      },
+      // 提前在外部声明this
+      teamSummary2: function () {
+        let _this = this
+        return this.members.map(function (member) {
+          return `${member}隶属于${_this.teamName}小组`
+        })
+      },
+      // 通过.bind()改变this指向
+      teamSummary3: function () {
+        return this.members.map(function (member) {
+          return `${member}隶属于${this.teamName}小组`
+        }.bind(this))
+      },
+      // 箭头函数改变this指向
+      teamSummary4: function () {
+        return this.members.map(item => {
+          return `${item}隶属于${this.teamName}小组`
+        })
+      }
+    }
+    console.log(team.teamSummary());
+    console.log(team.teamSummary2());
+    console.log(team.teamSummary3());
+    console.log(team.teamSummary4());
+
+
+
+
+  </script>
+</body>
+
+</html>

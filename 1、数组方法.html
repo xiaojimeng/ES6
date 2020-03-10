@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /*  数组方法：
+      1、forEach遍历数组
+      2、map:把每个数据做相同处理,return的结果是一个数组
+      3、filter:过滤,return的结果是一个数组
+      4、find:找到符合条件的之后，就不再往后面找。return的结果是符合条件的一个数据
+      5、every:一假则假,返回结果是boolean值
+      6、some:一真则真，返回结果是boolean值
+      7、 reduce：array.reduce((参数1，每一项的值) => {数据处理},初始化参数1的值)
+       */
+    // 1、forEach遍历数组
+    var colors = ["red", "blue", "green"]
+    for (var i = 0; i < colors.length; i++) {
+      console.log(colors[i]);
+    }
+    colors.forEach(function (color) {
+      console.log(color);
+    })
+    colors.forEach(color => {
+      console.log(color);
+    })
+    // 求一个数组的和
+    var numbers = [1, 2, 3, 4, 5]
+    var sum = 0
+    numbers.forEach(item => {
+      sum += item
+    })
+    console.log(sum);
+    // 2、map:把每个数据做相同处理之后return的结果是一个数组
+    // 数组中的每个数*2
+    var doubledNumbers = numbers.map(item => {
+      return item * 2
+    })
+    console.log(doubledNumbers);//[2, 4, 6, 8, 10]
+    var cars = [{ modle: "Buick", price: "cheap" }, { modle: "BWM", price: "expensive" }]
+    var prices = cars.map(item => {
+      return item.price
+    })
+    console.log(prices);//["cheap", "expensive"]
+    // 3、filter:过滤,return的结果是一个数组
+    var products = [
+      { name: "cucumber", type: "vegetable" },
+      { name: "banana", type: "fruit" },
+      { name: "celery", type: "fruit" },
+      { name: "orange", type: "vegetable" },]
+    var filterProducts = []
+    for (var i = 0; i < products.length; i++) {
+      if (products[i].type === "fruit") {
+        filterProducts.push(products[i])
+      }
+    }
+    console.log(filterProducts);
+
+    var filtered2 = products.filter(item => {
+      return item.type === "vegetable"
+    })
+    console.log(filtered2);
+
+    // 过滤掉：蔬菜，数量大于10，价格小于10
+    var arrs = [{ name: "cucumber", type: "vegetable", quantity: 1, price: 10 },
+    { name: "banana", type: "fruit", quantity: 3, price: 8 },
+    { name: "celery", type: "fruit", quantity: 0.9, price: 15 },
+    { name: "orange", type: "vegetable", quantity: 5, price: 1 },]
+    var arrs2 = arrs.filter(item => {
+      return item.type === "vegetable" && item.quantity > 10, item.price < 10
+    })
+    console.log(arrs2);
+    var post = { id: 4, title: "javascript" };
+    var comments = [
+      { postId: 4, content: "angular4" },
+      { postId: 2, content: "Node" },
+      { postId: 3, content: "Vue" },
+      { postId: 4, content: "React" },
+    ]
+    // var fn = function(post,comments){
+    //   return comments.filter(item => {
+    //     return item.postId===post.id
+    //   })
+    // }
+    // console.log(fn());
+    function fn(post, comments) {
+      return comments.filter(item => {
+        return item.postId === post.id
+      })
+    }
+    console.log(fn(post, comments));
+    // 4、find:找到符合条件的之后，就不再往后面找。return的结果是符合条件的一个数据
+    var users = [{ name: "kies" }, { name: "bill" }, { name: "angle" }]
+    var user = users.find(item => {
+      return item.name === "bill"
+    })
+    console.log(user);
+    // 数组对象A,根据指定对象的条件找到数组中符合条件的对象
+    var A = [{ id: 3, title: "Node" }, { id: 4, title: "vue" }, { id: 1, title: "vue" }]
+    var B = { postId: 1, content: "Hello World" }
+    function fn2(A, B) {
+      return A.find(item => {
+        return item.id === B.postId
+      })
+    }
+    console.log(fn2(A, B));
+    // 5、every:一假则假,返回结果是boolean值
+    // 6、some:一真则真，返回结果是boolean值
+    var computers = [
+      { name: "Apple", ram: 16 },
+      { name: "IBM", ram: 64 },
+      { name: "Acer", ram: 32 },
+    ]
+    var every = computers.every(item => {
+      return item.ram > 32
+    })
+    console.log(every);
+    var some = computers.some(item => {
+      return item.ram > 32
+    })
+    console.log(some);
+    // 检验注册页面，所有input的长度是否是>0
+    function Field(value) {
+      this.value = value
+    }
+    Field.prototype.validate = function () {
+      return this.value.length > 0
+    }
+    var username = new Field('xxxxxx')
+    var password = new Field("myxdh")
+    var phone = new Field("1288888")
+    // console.log(username.validate());
+    // console.log(password.validate());
+    var filters = [username, password, phone]
+    var flag = filters.every(item => {
+      return item.validate()
+    })
+    console.log(flag);
+
+    // 7、reduce： array.reduce((参数1，每一项的值) => {数据处理},参数1的值)
+    var sum2 = numbers.reduce((sum, item) => {
+      return sum + item
+    }, 0)
+    console.log(sum2);
+    // 判断字符串中括号是否对称
+    function fn3(string) {
+      return !string.split("").reduce((previous, char) => {
+        if (previous < 0) { return previous }
+        if (char == "(") { return ++previous }
+        if (char == ")") { return --previous }
+        return previous
+      }, 0)
+    }
+    console.log(fn3("(()))"));
+
+  </script>
+
+</body>
+
+</html>

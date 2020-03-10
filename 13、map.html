@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /*   
+      数据结构：map
+      键值对：与对象不同的是键值对可以是任何类型 
+      把map1转换成正常的数组:Array.from(map1)
+      将map1中的key转换成数组:Array.from(map1.keys())
+      将map1中的value转换成数组:Array.from(map1.values())
+      */
+    const map1 = new Map()
+    const key1 = "some string", key2 = {}, key3 = function () { }
+    map1.set(key1, "value of key1")
+    map1.set(key2, "value of key2")
+    map1.set(key3, "value of key3")
+    // 获取key对应的vallue值
+    console.log(map1.get(key1));
+    // 获取对应的value数量
+    console.log(map1.size);
+    // for...of遍历map1
+    for (let [key, value] of map1) {
+      console.log(`${key}:${value}`);
+    }
+    // 只获取key值
+    for (let key of map1.keys()) {
+      console.log(key);
+    }
+    // 只获取value值
+    for (let value of map1.values()) {
+      console.log(value);
+    }
+    // forEach遍历map1
+    map1.forEach((value, key) => {
+      console.log(`${key}:${value}`);
+    });
+    // 把map1转换成正常的数组:Array.from(map1)
+    console.log(Array.from(map1));
+    //[["some string", "value of key1"], [{…}, "value of key2"], [ƒ, "value of key3"]]
+    // 将map1中的key转换成数组
+    console.log(Array.from(map1.keys()));
+    // 将map1中的value转换成数组
+    console.log(Array.from(map1.values()));
+
+
+  </script>
+</body>
+
+</html>

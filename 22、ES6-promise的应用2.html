@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // Promise对象用于表示一个异步操作的最终状态（完成或失败），以及其返回的值
+    // 案例：动态往DOM添加内容（使用回调）
+    const posts = [
+      { title: "Post one", body: "this is pose one" },
+      { title: "Post two", body: "this is pose two" },
+
+    ]
+    function getPosts() {
+      setTimeout(() => {
+        let output = ''
+        posts.forEach((item, index) => {
+          output += `<li>${item.title}</li>`
+        })
+        document.body.innerHTML = output
+      }, 1000);
+    }
+    function createPost(post) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          posts.push(post)
+          const flag = false;
+          // const flag = true;
+          if (!flag) {
+            resolve()
+          } else {
+            reject("error")
+          }
+        }, 2000);
+      })
+    }
+
+    // createPost({ title: "Post three", body: "this is Post three" })
+    //   .then(getPosts)
+    //   .catch(err => console.log(err))
+
+    // *********async 和await
+    async function init() {
+      await createPost({ title: "Post three", body: "this is Post three" })
+      getPosts()
+    }
+    init()
+    // *********fetch和async
+    async function fetchUsers() {
+      const response = await fetch("http://jsonplaceholder.typicode.com/users")
+      const data = await response.json
+      console.log(data);
+    }
+    fetchUsers() 
+    // *********Promise.all
+    const promise1 = Promise.resolve("hello")
+    const promise2 = Promise.resolve(2)
+    const promise3 = new Promise((resolve, reject) => {
+      setTimeout(resolve, 2000, "goodbye");
+    })
+    const promise4 = fetch("http://jsonplaceholder.typicode.com/users").then(res => res.json())
+    Promise.all([promise1, promise2, promise3, promise4]).then(values => console.log(values))
+  </script>
+</body>
+
+</html>

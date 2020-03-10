@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>斐波那契数列</title>
+</head>
+
+<body>
+  <script>
+    // generator生成器，可以返回多次的函数
+    function* numbers() {
+      yield
+      // 注释掉返回结果不一样
+    }
+    const gen = numbers()
+    console.log(gen);
+    console.log(gen.next());//false
+    console.log(gen.next());//true
+    // 如果把numbers里面的yield注释掉，返回的都是true
+
+    // 斐波那契数列：前两个值相加等于第后一个值(,1,1,2,3,5,8,13)
+    function fib(max) {
+      var a = 0, b = 1, arr = [0, 1]
+      while (arr.length < max) {
+        [a, b] = [b, a + b]
+        arr.push(b)
+      }
+      return arr
+    }
+    console.log(fib(5));// max是返回的值的个数
+    // 通过generator生成斐波那契数列
+    function* fib2(max) {
+      let a = 0, b = 1, n = 0;
+      while (n < max) {
+        yield a;
+        [a, b] = [b, a + b];
+        n++;
+      }
+      return
+    }
+    let arr2 = []
+    for (let x of fib2(10)) {
+      arr2.push(x)
+    }
+    console.log(arr2);
+
+
+
+  </script>
+</body>
+
+</html>

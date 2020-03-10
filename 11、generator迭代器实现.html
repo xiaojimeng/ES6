@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 迭代器还原生成器的结构
+    function nameInterator(names) {
+      let nextIndex = 0;
+      return {
+        next: function () {
+          return nextIndex < names.length ? { value: names[nextIndex++], done: false } : { done: true }
+        }
+      }
+    }
+    const nameArray = ["Lisa", "Kris", "Herry"]
+    const name = nameInterator(nameArray)
+    console.log(name.next());//{value: "Lisa", done: false}
+    // console.log(name.next().value);//Lisa
+    console.log(name.next());//{value: "Kris", done: false}
+    console.log(name.next());//{value: "Henry", done: false}
+    console.log(name.next());//{value: undefined, done: true}
+
+    function* sayNames() {
+      yield 'Lisa';
+      yield 'Kris';
+      yield 'Henry';
+    }
+    const name2 = sayNames()
+    console.log(name2.next());//{value: "Lisa", done: false}
+    console.log(name2.next());//{value: "Kris", done: false}
+    console.log(name2.next());//{value: "Henry", done: false}
+    console.log(name2.next());//{value: undefined, done: true}
+  
+  // id自增
+  function* createIds() {
+    let index=1;
+    while(true) {
+      yield index++
+    }
+  }
+  const gen1=createIds()
+  // console.log(gen1.next().value);
+  for(let i=0;i<10;i++){
+    console.log(gen1.next().value);
+  }
+  </script>
+</body>
+
+</html>
